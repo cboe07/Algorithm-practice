@@ -1,0 +1,210 @@
+<script type="text/javascript">
+	
+//////////////////////////////////////////
+///////////////////ALGORITHM 1////////////
+//////////////////////////////////////////
+// A palindromic number reads the same both ways. The largest palindrome made from the product of two 2-digit numbers is 9009 = 91 × 99.
+// Find the largest palindrome made from the product of two 3-digit numbers.
+
+// function Palindromic(x) {
+//     var pal = parseInt(x.toString().split('').reverse().join(''));
+
+//     if (pal === x)
+//         return true;
+//     else
+//         return false;
+// }
+
+// var i = 0;
+// var j = 0;
+// var product = 0;
+// var max = 0;
+
+
+// for (i = 100; i <= 999; i++) {
+//     for (j = i; j <= 999; j++) {
+//         product = i * j;
+//         if (Palindromic(product)) {
+//           if( max < product ) { // this is new
+//             max = product;
+//             console.log(i + '*' + j + '=' + product);
+//           }
+//         }
+//     }
+// }
+
+
+// var answer = (913*993 = 906609)
+
+// //////////////////////////////////////////////////Next Solution
+// var max = 0;
+// var num1 = 0;
+// var num2 = 0;
+// for (let n = 999; n > 100; n--){
+//     for (let i = 998; i > 99; i--){
+//         temp = n * i;
+//         var tempString = temp.toString();
+//         var tempList = tempString.split('');
+//         // Now we have a list; check to see if it's a pali...
+//         var copyList = tempList.slice();
+//         var reverseList = copyList.reverse();
+//         var palindromic = true;
+//         for (let j = 0; j < tempList.length; j++){
+//             if (tempList[j] != reverseList[j]){
+//                 palindromic = false;
+//                 break;
+//             }
+//         }
+//         if (palindromic){
+//             if (parseInt(tempList.join('')) >= max){
+//                 max = parseInt(tempList.join(''));
+//                 num1 = n;
+//                 num2 = i;
+//             }
+//         }
+//     }
+// }
+// console.log(max);
+// console.log(num1);
+// console.log(num2);
+
+
+
+
+// /////////////////////////////////
+// //////////SOLUTION: PYTHON///////
+// /////////////////////////////////
+
+// def isPalindrome(value):
+//     b = list(value)
+//     c = []
+
+//     for i in range(len(b)-1, -1, -1):
+//         c.append(b[i])
+
+//     if b == c:
+//         return True
+//     else:
+//         return False
+
+
+// def getPalindromes():
+//     lyst = []
+//     for i in range(10000, 1000000):
+
+//         if isPalindrome(str(i)):
+//             lyst.append(str(i))
+
+//     return lyst
+
+
+// //print getPalindromes()
+// def algorithm1():
+//     palindromes = getPalindromes()
+
+//     for i in range(len(palindromes) - 1, 0, -1):
+//         factors = []
+
+//         for j in range(100, 1000):
+//             if int(palindromes[i])%j == 0:
+//                 factors.append(j)
+
+//         for k in range(len(factors) -1, 0, -1):
+//             if len(str(int(palindromes[i])/factors[k])) > 3:
+//                 break
+//             elif len(str(int(palindromes[i])/factors[k])) == 3:
+//                 return [palindromes[i], factors[k], int(palindromes[i])/factors[k]]
+
+//                 #print palindromes[i]
+//                 #print lyst[k]
+
+
+
+// print algorithm2()
+// //print algorithm1()
+
+
+///////////////////////////////////////////
+// //////////////ALGORITHM 2///////////////
+//////////////////////////////////////////
+
+// // 2520 is the smallest number that can be divided by each of the numbers from 1 to 10 without any remainder.
+// // What is the smallest positive number that is evenly divisible by all of the numbers from 1 to 20?
+
+
+// // determine start number = n ie. 20
+// function getSmallestDivisor(n){
+//   var i = n;
+
+//   // if not 0 then i++
+//   function checkI(i){
+//     for (var j = 1; j <= n; j++) {
+//       // loop 20 % i   where i goes from 1 to 20  must % = 0
+//       if( i % j !== 0 ){ return false; }
+//     };
+//     return true;
+//   }
+//   // break loop when n all are 0
+//   while( !(checkI(i)) ){ i+=n; }
+//   return i;
+// }
+
+// console.log(getSmallestDivisor(20));
+
+// //////////////////////////////////////////////////Next Solution
+
+// var found = false;
+// for(let i = 2520; found == false; i+=2520){
+// 	var x = 0;
+// 	for(let j = 0;j >= 11; j--){
+// 		if(i % j != 0){
+// 			break;
+// 		}else{
+// 			x++;
+// 		}
+// 	}
+// 	if(x == 10){
+// 		console.log(i);
+// 		found = true;
+// 		break
+// 	}
+// }
+
+
+// /////////////////////////////////
+// //////////SOLUTION: PYTHON///////
+// /////////////////////////////////
+
+// def algorithm2():
+//     not_found = True
+//     candidate = 0
+//     multiplier = 1
+//     while not_found:
+//         candidate = multiplier*20
+//         for i in range(19, 1, -1):
+//             #print candidate
+//             if candidate % i != 0:
+//                 break
+//             elif i ==2:
+//                 not_found = False
+//         multiplier += 1
+
+//     return candidate
+
+function romanize(num) {
+  var lookup = {M:1000,CM:900,D:500,CD:400,C:100,XC:90,L:50,XL:40,X:10,IX:9,V:5,IV:4,I:1}
+  roman = ''
+  for ( i in lookup ) {
+    while ( num >= lookup[i] ) {
+      roman += i;
+      num -= lookup[i];
+    }
+  }
+  return roman;
+}
+
+
+// romanize(42);
+console.log(romanize(42));
+
+</script>
