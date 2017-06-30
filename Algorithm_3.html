@@ -1,0 +1,61 @@
+
+<script type="text/javascript">
+
+var numRoutes = [];
+
+var getNumRoutes = function (sizeX, sizeY) {
+    numRoutes[sizeX] = numRoutes[sizeX] || []
+
+    if (numRoutes[sizeX][sizeY]) {
+        return numRoutes[sizeX][sizeY];
+    }
+    // console.log(numRoutes);
+    if (sizeX == 0 || sizeY == 0) return 1;
+
+    //Consider moving to the right
+    var routes = getNumRoutes(sizeX-1, sizeY);
+    routes += getNumRoutes(sizeX, sizeY - 1);
+    
+    numRoutes[sizeX][sizeY] = routes;
+
+    return routes;
+    
+};
+
+// console.log(getNumRoutes(2, 2));
+// console.log(getNumRoutes(4, 4));
+// console.log(getNumRoutes(8, 8));
+// console.log(getNumRoutes(10, 10));
+// console.log(getNumRoutes(15, 15));
+console.log(getNumRoutes(20, 20));
+
+
+
+function lattice(w,h){
+    function factorial(n){
+        if (n === 0){
+            return 1
+        }
+
+        return n * factorial(n-1);
+    }
+    var width = factorial(w);
+    var height = factorial(h);
+    var widthXHeight = factorial(w+h);
+    var numOfRoutes = widthXHeight/height/width;
+
+    return numOfRoutes;
+}
+
+// console.time('lattice');
+// n = lattice(20,20)
+// console.log("Answer is " + n)
+// console.timeEnd('lattice');
+
+console.log(lattice(20,20))
+
+</script>
+
+
+
+
